@@ -3,6 +3,13 @@
 import { useState, useEffect } from "react";
 import { signIn, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 
 export default function AuthButton({ title }) {
   const [user, setUser] = useState(null);
@@ -17,17 +24,32 @@ export default function AuthButton({ title }) {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex items-center gap-4">
       {user ? (
-        <>
-          <Button variant="destructive" onClick={() => signOut()}>
-            Logout
-          </Button>
-        </>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar className="w-10 h-10 cursor-pointer">
+              <AvatarImage
+                src={user.image || "/default-avatar.png"}
+                alt={user.name}
+              />
+              <AvatarFallback>
+                {user.name?.charAt(0).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>{user.name}</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => signOut()}
+              className="cursor-pointer text-red-500"
+            >
+              Logout
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       ) : (
-        <div>
-          <Button onClick={() => signIn("google")}>{title}</Button>
-        </div>
+        <Button onClick={() => signIn("google")}>{title}</Button>
       )}
     </div>
   );

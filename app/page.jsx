@@ -1,5 +1,3 @@
-import AuthButton from "@/components/AuthButton";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {
@@ -43,7 +41,14 @@ export default function Home() {
                 analytics with ease.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-2">
-                <AuthButton title={"Start Building Vendors"} />
+                <Link
+                  href="/dashboard"
+                  className="relative px-6 py-2 text-lg font-medium text-foreground backdrop-blur-md rounded-full 
+                             border border-foreground/30 shadow-lg transition-all 
+                             hover:border-foreground hover:bg-foreground/10 hover:text-foreground"
+                >
+                  Explore Vendors →
+                </Link>
               </div>
             </div>
           </div>
