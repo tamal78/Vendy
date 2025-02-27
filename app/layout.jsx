@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/sonner";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Vendy",
   description:
-    " Create and customize vendors effortlessly. Gather insights and analytics with ease",
+    "Create and customize vendors effortlessly. Gather insights and analytics with ease",
 };
 
 export default function RootLayout({ children }) {
@@ -33,8 +34,10 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <main>
-            <Navbar />
-            {children}
+            <Suspense>
+              <Navbar />
+              {children}
+            </Suspense>
             <Toaster />
           </main>
         </ThemeProvider>
