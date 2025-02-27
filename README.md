@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# **Vendy - Vendor Management System**
 
-## Getting Started
+## **📌 Overview**
 
-First, run the development server:
+Vendy is a simple vendor management system built using **Next.js (App Router), Prisma, PostgreSQL, and NextAuth.js**. It allows users to **authenticate via Google**, manage vendors (CRUD operations), and view vendors with **pagination**.
+
+---
+
+## **🚀 Features**
+
+✅ **Google Authentication (NextAuth.js)**  
+✅ **Manually Added User Authentication**  
+✅ **Create, Edit, and Delete Vendors**  
+✅ **Paginated Vendor List**  
+✅ **ShadCN UI Components for Clean UI**  
+✅ **Skeleton Loaders for Smooth UX**  
+✅ **Optimized Server Actions (Next.js Server Actions in `/actions`)**
+
+---
+
+## **🛠️ Tech Stack**
+
+- **Frontend:** Next.js 14 (App Router)
+- **Backend:** Next.js API Routes, Prisma ORM
+- **Database:** PostgreSQL
+- **Authentication:** NextAuth.js (Google OAuth)
+- **UI Components:** ShadCN UI
+- **Styling:** Tailwind CSS
+- **State Management:** React Hooks
+
+---
+
+## **📝 Installation & Setup**
+
+### **1️⃣ Clone the Repository**
+
+```bash
+git clone https://github.com/your-repo/vendy.git
+cd vendy
+```
+
+### **2️⃣ Install Dependencies**
+
+```bash
+npm install
+```
+
+### **3️⃣ Configure Environment Variables**
+
+Create a `.env.local` file and add the following:
+
+```plaintext
+DATABASE_URL=postgresql://user:password@localhost:5432/vendy
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+NEXTAUTH_SECRET=your-random-secret
+```
+
+### **4️⃣ Set Up the Database (Prisma + PostgreSQL)**
+
+```bash
+npx prisma migrate dev --name init
+npx prisma db seed
+```
+
+### **5️⃣ Start the Development Server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will be live at: `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## **🔑 Test Credentials**
 
-## Learn More
+A test user has been **manually added** for authentication:
 
-To learn more about Next.js, take a look at the following resources:
+- **Email:** `test20244321@gmail.com`
+- **Password:** `test1234#`
+- **Login via:** **Google OAuth**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> **Note:** Only this manually added user can log in.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## **🛠️ Folder Structure**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+📦 vendy
+ ┣ 📂 app
+ ┃ ┣ 📂 vendors
+ ┃ ┃ ┣ 📜 page.jsx
+ ┃ ┃ ┣ 📂 [id]
+ ┃ ┃ ┃ ┣ 📜 page.jsx
+ ┃ ┣ 📂 auth
+ ┃ ┃ ┣ 📂 [...nextauth]
+ ┃ ┃ ┃ ┣ 📜 route.js
+ ┣ 📂 actions
+ ┃ ┣ 📜 vendor.js
+ ┣ 📂 components
+ ┃ ┣ 📜 VendorDialog.jsx
+ ┃ ┣ 📜 VendorDeleteAlert.jsx
+ ┃ ┣ 📜 Navbar.jsx
+ ┃ ┣ 📜 AuthButton.jsx
+ ┃ ┣ 📜 Logo.jsx
+ ┃ ┣ 📜 ThemeSwitche.jsx
+ ┣ 📂 lib
+ ┃ ┣ 📜 utils.js
+ ┣ 📂 prisma
+ ┃ ┣ 📜 schema.prisma
+ ┣ 📜 .env
+ ┣ 📜 README.md
+ ┣ 📜 next.config.js
+ ┣ 📜 tailwind.config.js
+ ┣ 📜 package.json
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **Available Routes**
+
+- `/` → Home Page
+- `/vendors` → Vendor List Page
+- `/vendors/[id]` → Edit Vendor Page
+
+---
+
+## **📸 Screenshots**
+
+🚀 **Login Page**  
+🛠 **Vendor Management Table**  
+📄 **Create/Edit Vendor Dialog**  
+🔄 **Pagination UI**
+
+_(Add Screenshots here if required)_
+
+---
+
+## **📌 Future Improvements**
+
+✅ **Search & Filter for Vendors**  
+✅ **Admin Dashboard for Role Management**  
+✅ **Vendor Reports & Analytics**
+
+---
+
+## **📧 Contact & Support**
+
+If you have any issues or need help, feel free to reach out! 🚀🔥
