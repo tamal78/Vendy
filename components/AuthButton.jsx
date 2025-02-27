@@ -10,22 +10,28 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton"; // Import Skeleton
 
 export default function AuthButton({ title }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchSession() {
       const res = await fetch("/api/auth/session");
       const data = await res.json();
       setUser(data?.user || null);
+      setLoading(false); // Stop loading once the session is fetched
     }
     fetchSession();
   }, []);
 
   return (
     <div className="flex items-center gap-4">
-      {user ? (
+      {loading ? (
+        // Skeleton Loader while fetching session
+        <Skeleton className="w-10 h-10 rounded-full" />
+      ) : user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="w-10 h-10 cursor-pointer">
@@ -39,7 +45,9 @@ export default function AuthButton({ title }) {
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>{user.name}</DropdownMenuItem>
+            <DropdownMenuItem className="cursor-default">
+              Welcome, {user.name}!
+            </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => signOut()}
               className="cursor-pointer text-red-500"
