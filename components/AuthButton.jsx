@@ -10,7 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Skeleton } from "@/components/ui/skeleton"; // Import Skeleton
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AuthButton({ title }) {
   const [user, setUser] = useState(null);
@@ -21,7 +21,7 @@ export default function AuthButton({ title }) {
       const res = await fetch("/api/auth/session");
       const data = await res.json();
       setUser(data?.user || null);
-      setLoading(false); // Stop loading once the session is fetched
+      setLoading(false);
     }
     fetchSession();
   }, []);
@@ -29,7 +29,6 @@ export default function AuthButton({ title }) {
   return (
     <div className="flex items-center gap-4">
       {loading ? (
-        // Skeleton Loader while fetching session
         <Skeleton className="w-10 h-10 rounded-full" />
       ) : user ? (
         <DropdownMenu>

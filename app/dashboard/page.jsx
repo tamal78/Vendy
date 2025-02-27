@@ -21,9 +21,9 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
-import { Skeleton } from "@/components/ui/skeleton"; // Import Skeleton
-import VendorDialog from "@/components/VendorDialogue"; // Import VendorDialog
-import VendorDeleteDialog from "@/components/VendorDeleteButton"; // Import Delete button
+import { Skeleton } from "@/components/ui/skeleton";
+import VendorDialog from "@/components/VendorDialogue";
+import VendorDeleteDialog from "@/components/VendorDeleteButton";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function DashboardPage() {
   const searchParams = useSearchParams();
 
   const vendorsPerPage = 5;
-  const currentPage = Number(searchParams.get("page")) || 1; // Read page from URL
+  const currentPage = Number(searchParams.get("page")) || 1;
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
@@ -54,11 +54,10 @@ export default function DashboardPage() {
 
   return (
     <div className="p-6">
-      {/* Header & Add Vendor Button */}
       <div className="flex justify-between items-center mb-4">
         <h1
           className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-400 
-      hover:underline underline-offset-4 transition-all duration-300"
+          hover:underline underline-offset-4 transition-all duration-300"
         >
           Vendors List
         </h1>
@@ -68,7 +67,6 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* Table */}
       <div className="overflow-x-auto bg-background rounded-lg shadow-md border border-border">
         <Table>
           <TableHeader>
@@ -131,11 +129,9 @@ export default function DashboardPage() {
         </Table>
       </div>
 
-      {/* Pagination */}
       <div className="flex justify-end items-center mt-4">
         <Pagination>
           <PaginationContent className="ml-auto flex gap-1">
-            {/* Always show Previous, disable when page = 1 */}
             <PaginationItem>
               <PaginationPrevious
                 href={`${pathname}?page=${currentPage - 1}`}
@@ -147,9 +143,8 @@ export default function DashboardPage() {
               />
             </PaginationItem>
 
-            {/* Show first 3 pages dynamically */}
             {Array.from({
-              length: Math.min(4, Math.ceil(total / vendorsPerPage)),
+              length: Math.min(3, Math.ceil(total / vendorsPerPage)),
             }).map((_, index) => {
               const pageNumber = index + 1;
               return (
@@ -168,7 +163,6 @@ export default function DashboardPage() {
               );
             })}
 
-            {/* Show Ellipsis & Last Page when more than 3 pages exist */}
             {Math.ceil(total / vendorsPerPage) > 3 &&
               currentPage < Math.ceil(total / vendorsPerPage) - 1 && (
                 <>
@@ -195,7 +189,6 @@ export default function DashboardPage() {
                 </>
               )}
 
-            {/* Always show Next, disable when on the last page */}
             <PaginationItem>
               <PaginationNext
                 href={`${pathname}?page=${currentPage + 1}`}

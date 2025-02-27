@@ -120,7 +120,6 @@ export default function VendorDialog({ vendorId = null, onDone }) {
           </DialogDescription>
         </DialogHeader>
 
-        {/* Scrollable Form Fields */}
         <div className="max-h-[60vh] overflow-y-auto pr-2 flex-1">
           <Form {...form}>
             <form
@@ -241,7 +240,6 @@ export default function VendorDialog({ vendorId = null, onDone }) {
           </Form>
         </div>
 
-        {/* Fixed Submit Button (not scrollable) */}
         <DialogFooter className="border-t pt-4">
           <Button
             type="submit"

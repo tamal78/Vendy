@@ -4,14 +4,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-//// 🔹 Authentication Actions 🔹 ////
 export async function getSession(auth) {
   return await auth();
 }
 
-//// 🔹 Vendor CRUD Operations 🔹 ////
-
-// ✅ Create Vendor
 export async function createVendor(data) {
   try {
     const vendor = await prisma.vendor.create({ data });
@@ -22,7 +18,6 @@ export async function createVendor(data) {
   }
 }
 
-// ✅ Fetch Vendors (Paginated)
 export async function getVendors(page = 1, limit = 10) {
   try {
     const vendors = await prisma.vendor.findMany({
@@ -37,12 +32,10 @@ export async function getVendors(page = 1, limit = 10) {
   }
 }
 
-// ✅ Get Vendor by ID
 export async function getVendorById(id) {
   return await prisma.vendor.findUnique({ where: { id } });
 }
 
-// ✅ Update Vendor
 export async function updateVendor(id, data) {
   try {
     const updatedVendor = await prisma.vendor.update({
@@ -56,7 +49,6 @@ export async function updateVendor(id, data) {
   }
 }
 
-// ✅ Delete Vendor
 export async function deleteVendor(id) {
   try {
     await prisma.vendor.delete({ where: { id } });
