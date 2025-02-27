@@ -125,17 +125,6 @@ A test user has been **manually added** for authentication:
 
 ---
 
-## **📸 Screenshots**
-
-🚀 **Login Page**  
-🛠 **Vendor Management Table**  
-📄 **Create/Edit Vendor Dialog**  
-🔄 **Pagination UI**
-
-_(Add Screenshots here if required)_
-
----
-
 ## **📌 Future Improvements**
 
 ✅ **Search & Filter for Vendors**  
@@ -146,4 +135,4 @@ _(Add Screenshots here if required)_
 
 ## **📧 Contact & Support**
 
-If you have any issues or need help, feel free to reach out! 🚀🔥
+If you have any issues or need help, feel free to reach out to tamalkundu2002@gmail.com! 🚀🔥
