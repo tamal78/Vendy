@@ -20,7 +20,7 @@ Vendy is a simple vendor management system built using **Next.js (App Router), P
 
 ## **🛠️ Tech Stack**
 
-- **Frontend:** Next.js 14 (App Router)
+- **Frontend:** Next.js 15 (App Router)
 - **Backend:** Next.js API Routes, Prisma ORM
 - **Database:** PostgreSQL
 - **Authentication:** NextAuth.js (Google OAuth)
