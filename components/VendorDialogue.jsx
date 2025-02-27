@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createVendor, updateVendor, getVendorById } from "@/actions/vendor";
+import { createVendor, getTotalVendors } from "@/actions/vendor";
 import {
   Dialog,
   DialogContent,
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -25,7 +25,7 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Pencil, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { toast } from "sonner";
 
 const formSchema = z.object({
@@ -39,8 +39,9 @@ const formSchema = z.object({
   zipCode: z.string().min(4, "Zip Code is required"),
 });
 
-export default function VendorDialog({ vendorId = null, onDone }) {
+export default function VendorDialog({ onDone }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -58,39 +59,19 @@ export default function VendorDialog({ vendorId = null, onDone }) {
     },
   });
 
-  useEffect(() => {
-    if (vendorId) {
-      async function fetchVendor() {
-        const vendor = await getVendorById(vendorId);
-        if (vendor) {
-          form.reset(vendor);
-        }
-      }
-      fetchVendor();
-    } else {
-      form.reset();
-    }
-  }, [vendorId]);
-
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-
-      if (vendorId) {
-        await updateVendor(vendorId, data);
-        toast.success("Vendor updated successfully!");
-      } else {
-        await createVendor(data);
-        toast.success("Vendor created successfully!");
-      }
-
+      await createVendor(data);
+      toast.success("Vendor created successfully!");
       form.reset();
       setOpen(false);
       onDone?.();
+      router.push(`/vendors`);
       router.refresh();
     } catch (error) {
-      toast.error("Failed to save vendor. Try again.");
-      console.error("Error saving vendor:", error);
+      toast.error("Failed to create vendor. Try again.");
+      console.error("Error creating vendor:", error);
     } finally {
       setLoading(false);
     }
@@ -99,33 +80,22 @@ export default function VendorDialog({ vendorId = null, onDone }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant={vendorId ? "outline" : "default"}>
-          {vendorId ? (
-            <Pencil className="w-4 h-4" />
-          ) : (
-            <Plus className="w-4 h-4" />
-          )}
-          {vendorId ? null : " Add Vendor"}
+        <Button variant="default">
+          <Plus className="w-4 h-4" />
+          Add Vendor
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px] max-h-[90vh] flex flex-col">
+      <DialogContent className="sm:max-w-[490px] max-h-[90vh] flex flex-col">
         <DialogHeader>
-          <DialogTitle>
-            {vendorId ? "Edit Vendor" : "Create Vendor"}
-          </DialogTitle>
+          <DialogTitle>Create Vendor</DialogTitle>
           <DialogDescription>
-            {vendorId
-              ? "Update vendor details"
-              : "Fill in details to create a new vendor."}
+            Fill in details to create a new vendor.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="max-h-[60vh] overflow-y-auto pr-2 flex-1">
+        <div className="max-h-[70vh] overflow-y-auto pr-2 flex-1">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col gap-4"
-            >
+            <form className="flex flex-col gap-4">
               <FormField
                 control={form.control}
                 name="name"
@@ -247,7 +217,7 @@ export default function VendorDialog({ vendorId = null, onDone }) {
             disabled={loading}
             className="w-full"
           >
-            {vendorId ? "Update Vendor" : "Create Vendor"}
+            Create Vendor
           </Button>
         </DialogFooter>
       </DialogContent>

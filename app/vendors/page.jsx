@@ -24,6 +24,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import VendorDialog from "@/components/VendorDialogue";
 import VendorDeleteDialog from "@/components/VendorDeleteButton";
+import { Pencil } from "lucide-react";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     fetchVendors(currentPage);
-  }, [currentPage]);
+  }, [currentPage, searchParams]);
 
   const fetchVendors = async (page) => {
     setLoading(true);
@@ -61,10 +62,7 @@ export default function DashboardPage() {
         >
           Vendors List
         </h1>
-        <VendorDialog
-          vendorId={null}
-          onDone={() => fetchVendors(currentPage)}
-        />
+        <VendorDialog onDone={() => fetchVendors(currentPage)} />
       </div>
 
       <div className="overflow-x-auto bg-background rounded-lg shadow-md border border-border">
@@ -107,10 +105,14 @@ export default function DashboardPage() {
                     {vendor.bankName}
                   </TableCell>
                   <TableCell className="text-center flex justify-center gap-3">
-                    <VendorDialog
-                      vendorId={vendor.id}
-                      onDone={() => fetchVendors(currentPage)}
-                    />
+                    <Button
+                      onClick={() => {
+                        router.push(`/vendors/${vendor.id}`);
+                      }}
+                      variant="secondary"
+                    >
+                      <Pencil className="w-4 h-4" />
+                    </Button>
                     <VendorDeleteDialog
                       vendorId={vendor.id}
                       onDone={() => fetchVendors(currentPage)}

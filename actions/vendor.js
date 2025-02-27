@@ -23,6 +23,7 @@ export async function getVendors(page = 1, limit = 10) {
     const vendors = await prisma.vendor.findMany({
       skip: (page - 1) * limit,
       take: limit,
+      orderBy: { createdAt: "desc" },
     });
     const totalVendors = await prisma.vendor.count();
     return { vendors, total: totalVendors };

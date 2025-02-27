@@ -17,7 +17,7 @@ export const authOptions = {
         where: { email: user.email },
       });
 
-      return !!existingUser; // Allow login only for existing users
+      return !!existingUser;
     },
 
     async session({ session }) {
@@ -33,7 +33,7 @@ export const authOptions = {
     },
 
     async redirect({ url, baseUrl }) {
-      return `${baseUrl}/dashboard`; // Always redirect to dashboard after login
+      return `${baseUrl}/vendors`;
     },
   },
   secret: process.env.NEXTAUTH_SECRET,

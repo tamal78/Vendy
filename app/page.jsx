@@ -42,7 +42,7 @@ export default function Home() {
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-2">
                 <Link
-                  href="/dashboard"
+                  href="/vendors"
                   className="relative px-6 py-2 text-lg font-medium text-foreground backdrop-blur-md rounded-full 
                              border border-foreground/30 shadow-lg transition-all 
                              hover:border-foreground hover:bg-foreground/10 hover:text-foreground"
